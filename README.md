@@ -1,7 +1,3 @@
-Dưới đây là bản **README.md** tóm tắt toàn bộ nội dung tài liệu của bạn, chuẩn định dạng, dễ dùng cho GitHub:
-
----
-
 # Hệ Thống Đặt Bàn & Đặt Món Trực Tuyến Cho Nhà Hàng
 
 ## Thông Tin Đề Tài
