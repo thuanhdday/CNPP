@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân - Nhà hàng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .profile-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: -100px auto 2rem;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .stat-label {
+            color: #6c757d;
+        }
+        .nav-tabs {
+            margin-bottom: 2rem;
+        }
+        .booking-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .booking-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        .status-confirmed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="profile-header">
+        <div class="container">
+            <h1>Thông tin cá nhân</h1>
+            <p class="lead">Quản lý thông tin và lịch sử đặt bàn của bạn</p>
+        </div>
+    </header>
+
+    <div class="profile-container container">
+        <div class="profile-avatar">
+            <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Avatar">
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Lượt đặt bàn</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Đánh giá</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">4.5</div>
+                <div class="stat-label">Điểm trung bình</div>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#info">
+                    Thông tin cá nhân
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#bookings">
+                    Lịch sử đặt bàn
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#security">
+                    Bảo mật
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Thông tin cá nhân -->
+            <div class="tab-pane fade show active" id="info">
+                <div class="profile-card">
+                    <h3 class="mb-4">Thông tin cá nhân</h3>
+                    <form id="profileForm">
+                        <div class="mb-3">
+                            <label class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="name" value="Nguyễn Văn A">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" value="example@email.com" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="phone" value="0123456789">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ</label>
+                            <textarea class="form-control" id="address" rows="3">123 Đường ABC, Quận XYZ, TP.HCM</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Lịch sử đặt bàn -->
+            <div class="tab-pane fade" id="bookings">
+                <div class="profile-card">
+                    <h3 class="mb-4">Lịch sử đặt bàn</h3>
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <h5 class="mb-0">Đặt bàn #123</h5>
+                            <span class="booking-status status-confirmed">Đã xác nhận</span>
+                        </div>
+                        <p><strong>Thời gian:</strong> 19:00 - 15/03/2024</p>
+                        <p><strong>Số người:</strong> 4</p>
+                        <p><strong>Ghi chú:</strong> Sinh nhật</p>
+                    </div>
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <h5 class="mb-0">Đặt bàn #122</h5>
+                            <span class="booking-status status-pending">Đang chờ</span>
+                        </div>
+                        <p><strong>Thời gian:</strong> 18:30 - 20/03/2024</p>
+                        <p><strong>Số người:</strong> 2</p>
+                        <p><strong>Ghi chú:</strong> Bàn view đẹp</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảo mật -->
+            <div class="tab-pane fade" id="security">
+                <div class="profile-card">
+                    <h3 class="mb-4">Đổi mật khẩu</h3>
+                    <form id="passwordForm">
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu hiện tại</label>
+                            <input type="password" class="form-control" id="currentPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu mới</label>
+                            <input type="password" class="form-control" id="newPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Xác nhận mật khẩu mới</label>
+                            <input type="password" class="form-control" id="confirmPassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+                    </form>
+                </div>
+
+                <div class="profile-card">
+                    <h3 class="mb-4">Liên kết tài khoản</h3>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <i class="fab fa-google me-2"></i>
+                            Google
+                        </div>
+                        <button class="btn btn-outline-primary">Liên kết</button>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fab fa-facebook me-2"></i>
+                            Facebook
+                        </div>
+                        <button class="btn btn-outline-primary">Liên kết</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Xử lý form thông tin cá nhân
+        document.getElementById('profileForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Cập nhật thông tin thành công!');
+        });
+
+        // Xử lý form đổi mật khẩu
+        document.getElementById('passwordForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Đổi mật khẩu thành công!');
+        });
+    </script>
+</body>
+</html> 

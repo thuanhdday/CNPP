@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt bàn - Restaurant Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .booking-form {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .restaurant-summary {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .time-slot {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .time-slot:hover {
+            background: #f8f9fa;
+        }
+
+        .time-slot.selected {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+        }
+
+        .table-option {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .table-option:hover {
+            background: #f8f9fa;
+        }
+
+        .table-option.selected {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .table-option i {
+            color: #ff6b6b;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include header -->
+    <div id="header"></div>
+
+    <!-- Main content -->
+    <main class="py-5">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="restaurants.html">Nhà hàng</a></li>
+                    <li class="breadcrumb-item"><a href="#" id="restaurantLink">Tên nhà hàng</a></li>
+                    <li class="breadcrumb-item active">Đặt bàn</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Booking form -->
+                    <div class="booking-form">
+                        <h4 class="mb-4">Thông tin đặt bàn</h4>
+                        <form id="bookingForm">
+                            <!-- Date selection -->
+                            <div class="mb-4">
+                                <label class="form-label">Ngày đặt bàn</label>
+                                <input type="date" class="form-control" id="bookingDate" required>
+                            </div>
+
+                            <!-- Time slots -->
+                            <div class="mb-4">
+                                <label class="form-label">Giờ đặt bàn</label>
+                                <div class="time-slots" id="timeSlots">
+                                    <!-- Time slots will be dynamically added here -->
+                                </div>
+                            </div>
+
+                            <!-- Number of guests -->
+                            <div class="mb-4">
+                                <label class="form-label">Số người</label>
+                                <select class="form-select" id="guestCount" required>
+                                    <option value="">Chọn số người</option>
+                                    <option value="1-2">1-2 người</option>
+                                    <option value="3-4">3-4 người</option>
+                                    <option value="5-6">5-6 người</option>
+                                    <option value="7-8">7-8 người</option>
+                                    <option value="9+">Trên 8 người</option>
+                                </select>
+                            </div>
+
+                            <!-- Table options -->
+                            <div class="mb-4">
+                                <label class="form-label">Chọn bàn</label>
+                                <div id="tableOptions">
+                                    <!-- Table options will be dynamically added here -->
+                                </div>
+                            </div>
+
+                            <!-- Contact information -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Thông tin liên hệ</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Họ tên</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input type="tel" class="form-control" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Ghi chú thêm</label>
+                                        <textarea class="form-control" rows="3" placeholder="Yêu cầu đặc biệt (nếu có)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-calendar-check me-2"></i>Xác nhận đặt bàn
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Restaurant summary -->
+                    <div class="restaurant-summary">
+                        <h5 class="mb-4">Thông tin nhà hàng</h5>
+                        <div class="restaurant-info">
+                            <h6 id="restaurantName">Tên nhà hàng</h6>
+                            <p class="text-muted mb-3" id="restaurantAddress">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                Địa chỉ nhà hàng
+                            </p>
+                            <div class="mb-3">
+                                <i class="fas fa-phone-alt me-2"></i>
+                                <a href="tel:" class="text-decoration-none" id="restaurantPhone">Số điện thoại</a>
+                            </div>
+                            <div class="mb-3">
+                                <i class="fas fa-clock me-2"></i>
+                                <span id="restaurantHours">Giờ mở cửa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking summary -->
+                    <div class="booking-summary d-none">
+                        <h5 class="mb-3">Tóm tắt đặt bàn</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <i class="fas fa-calendar me-2"></i>
+                                    <span id="summaryDate">Chưa chọn ngày</span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-clock me-2"></i>
+                                    <span id="summaryTime">Chưa chọn giờ</span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-users me-2"></i>
+                                    <span id="summaryGuests">Chưa chọn số người</span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-chair me-2"></i>
+                                    <span id="summaryTable">Chưa chọn bàn</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // Load header and footer
+        fetch('templates/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+        
+        fetch('templates/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+
+        // Get restaurant data from localStorage
+        const restaurant = JSON.parse(localStorage.getItem('selectedRestaurant'));
+        if (!restaurant) {
+            window.location.href = 'restaurants.html';
+        }
+
+        // Update page with restaurant data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update title and breadcrumb
+            document.title = `Đặt bàn - ${restaurant.name}`;
+            document.getElementById('restaurantLink').textContent = restaurant.name;
+            document.getElementById('restaurantLink').href = `restaurant-detail.html?id=${restaurant.id}`;
+
+            // Update restaurant summary
+            document.getElementById('restaurantName').textContent = restaurant.name;
+            document.getElementById('restaurantAddress').textContent = restaurant.address;
+            document.getElementById('restaurantPhone').textContent = restaurant.phone;
+            document.getElementById('restaurantPhone').href = `tel:${restaurant.phone}`;
+            document.getElementById('restaurantHours').textContent = restaurant.openHours;
+
+            // Generate time slots
+            generateTimeSlots();
+
+            // Generate table options
+            generateTableOptions();
+
+            // Initialize form handlers
+            initializeFormHandlers();
+        });
+
+        // Generate time slots based on restaurant hours
+        function generateTimeSlots() {
+            const timeSlots = document.getElementById('timeSlots');
+            const slots = [
+                '11:00', '11:30', '12:00', '12:30', '13:00', '13:30',
+                '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00'
+            ];
+
+            timeSlots.innerHTML = slots.map(time => `
+                <span class="time-slot" data-time="${time}">${time}</span>
+            `).join('');
+
+            // Add click handler for time slots
+            timeSlots.querySelectorAll('.time-slot').forEach(slot => {
+                slot.addEventListener('click', function() {
+                    timeSlots.querySelector('.selected')?.classList.remove('selected');
+                    this.classList.add('selected');
+                    updateBookingSummary();
+                });
+            });
+        }
+
+        // Generate table options based on guest count
+        function generateTableOptions() {
+            const tableOptions = document.getElementById('tableOptions');
+            const tables = [
+                { id: 1, name: 'Bàn thường', icon: 'chair', capacity: '1-4' },
+                { id: 2, name: 'Bàn gia đình', icon: 'users', capacity: '4-8' },
+                { id: 3, name: 'Phòng riêng VIP', icon: 'star', capacity: '8-20' }
+            ];
+
+            tableOptions.innerHTML = tables.map(table => `
+                <div class="table-option" data-table-id="${table.id}">
+                    <i class="fas fa-${table.icon}"></i>
+                    <strong>${table.name}</strong>
+                    <span class="text-muted ms-2">${table.capacity} người</span>
+                </div>
+            `).join('');
+
+            // Add click handler for table options
+            tableOptions.querySelectorAll('.table-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    tableOptions.querySelector('.selected')?.classList.remove('selected');
+                    this.classList.add('selected');
+                    updateBookingSummary();
+                });
+            });
+        }
+
+        // Initialize form handlers
+        function initializeFormHandlers() {
+            const form = document.getElementById('bookingForm');
+            const bookingDate = document.getElementById('bookingDate');
+            const guestCount = document.getElementById('guestCount');
+
+            // Set minimum date to today
+            const today = new Date();
+            bookingDate.min = today.toISOString().split('T')[0];
+            
+            // Add change handlers
+            bookingDate.addEventListener('change', updateBookingSummary);
+            guestCount.addEventListener('change', updateBookingSummary);
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate selections
+                const selectedTime = document.querySelector('.time-slot.selected');
+                const selectedTable = document.querySelector('.table-option.selected');
+                
+                if (!selectedTime || !selectedTable) {
+                    alert('Vui lòng chọn giờ đặt bàn và loại bàn');
+                    return;
+                }
+
+                // Show confirmation
+                const confirmed = confirm('Xác nhận đặt bàn với thông tin đã chọn?');
+                if (confirmed) {
+                    // Here you would typically send the booking data to your server
+                    alert('Đặt bàn thành công! Chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.');
+                    window.location.href = 'restaurant-detail.html';
+                }
+            });
+        }
+
+        // Update booking summary
+        function updateBookingSummary() {
+            const summary = document.querySelector('.booking-summary');
+            const date = document.getElementById('bookingDate').value;
+            const time = document.querySelector('.time-slot.selected')?.dataset.time;
+            const guests = document.getElementById('guestCount').value;
+            const table = document.querySelector('.table-option.selected')?.querySelector('strong').textContent;
+
+            if (date || time || guests || table) {
+                summary.classList.remove('d-none');
+                document.getElementById('summaryDate').textContent = date ? new Date(date).toLocaleDateString('vi-VN') : 'Chưa chọn ngày';
+                document.getElementById('summaryTime').textContent = time || 'Chưa chọn giờ';
+                document.getElementById('summaryGuests').textContent = guests || 'Chưa chọn số người';
+                document.getElementById('summaryTable').textContent = table || 'Chưa chọn bàn';
+            }
+        }
+    </script>
+</body>
+</html> 

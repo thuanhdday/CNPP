@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung tâm trợ giúp - Restaurant Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Include header -->
+    <div id="header"></div>
+
+    <!-- Main content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-primary text-white py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold mb-4">Trung tâm trợ giúp</h1>
+                        <p class="lead">Tìm câu trả lời cho mọi thắc mắc của bạn</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" placeholder="Tìm kiếm câu hỏi...">
+                            <button class="btn btn-light btn-lg">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Help Categories -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center p-4">
+                                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-user-circle fa-2x"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Tài khoản</h3>
+                                <p class="mb-3">Quản lý tài khoản, đăng nhập và bảo mật</p>
+                                <a href="#account" class="btn btn-outline-primary">Xem hướng dẫn</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center p-4">
+                                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-shopping-cart fa-2x"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Đặt món & Thanh toán</h3>
+                                <p class="mb-3">Hướng dẫn đặt món và các phương thức thanh toán</p>
+                                <a href="#ordering" class="btn btn-outline-primary">Xem hướng dẫn</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center p-4">
+                                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-truck fa-2x"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Giao hàng</h3>
+                                <p class="mb-3">Thông tin về giao hàng và theo dõi đơn hàng</p>
+                                <a href="#delivery" class="btn btn-outline-primary">Xem hướng dẫn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Help Content -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <!-- Sidebar -->
+                    <div class="col-lg-3">
+                        <div class="list-group">
+                            <a href="#account" class="list-group-item list-group-item-action">Tài khoản</a>
+                            <a href="#ordering" class="list-group-item list-group-item-action">Đặt món & Thanh toán</a>
+                            <a href="#delivery" class="list-group-item list-group-item-action">Giao hàng</a>
+                            <a href="#support" class="list-group-item list-group-item-action">Hỗ trợ khách hàng</a>
+                            <a href="#technical" class="list-group-item list-group-item-action">Vấn đề kỹ thuật</a>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="col-lg-9">
+                        <!-- Account Section -->
+                        <div id="account" class="mb-5">
+                            <h2 class="h3 mb-4">Tài khoản</h2>
+                            
+                            <div class="accordion" id="accountAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#account1">
+                                            Làm thế nào để tạo tài khoản?
+                                        </button>
+                                    </h3>
+                                    <div id="account1" class="accordion-collapse collapse show" data-bs-parent="#accountAccordion">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Nhấn vào nút "Đăng ký" trên thanh menu</li>
+                                                <li>Điền thông tin cá nhân theo yêu cầu</li>
+                                                <li>Xác nhận email đăng ký</li>
+                                                <li>Hoàn tất quá trình đăng ký</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#account2">
+                                            Quên mật khẩu phải làm sao?
+                                        </button>
+                                    </h3>
+                                    <div id="account2" class="accordion-collapse collapse" data-bs-parent="#accountAccordion">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Nhấn vào "Quên mật khẩu?" tại trang đăng nhập</li>
+                                                <li>Nhập email đăng ký tài khoản</li>
+                                                <li>Kiểm tra email và làm theo hướng dẫn</li>
+                                                <li>Tạo mật khẩu mới</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ordering Section -->
+                        <div id="ordering" class="mb-5">
+                            <h2 class="h3 mb-4">Đặt món & Thanh toán</h2>
+                            
+                            <div class="accordion" id="orderingAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ordering1">
+                                            Các bước đặt món
+                                        </button>
+                                    </h3>
+                                    <div id="ordering1" class="accordion-collapse collapse show" data-bs-parent="#orderingAccordion">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Chọn nhà hàng bạn muốn đặt món</li>
+                                                <li>Duyệt menu và thêm món vào giỏ hàng</li>
+                                                <li>Kiểm tra giỏ hàng và điều chỉnh số lượng nếu cần</li>
+                                                <li>Nhấn "Thanh toán" và chọn phương thức thanh toán</li>
+                                                <li>Xác nhận đơn hàng</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ordering2">
+                                            Các phương thức thanh toán
+                                        </button>
+                                    </h3>
+                                    <div id="ordering2" class="accordion-collapse collapse" data-bs-parent="#orderingAccordion">
+                                        <div class="accordion-body">
+                                            <ul>
+                                                <li>Tiền mặt khi nhận hàng (COD)</li>
+                                                <li>Thẻ tín dụng/ghi nợ</li>
+                                                <li>Ví điện tử (Momo, ZaloPay, VNPay)</li>
+                                                <li>Chuyển khoản ngân hàng</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Section -->
+                        <div id="delivery" class="mb-5">
+                            <h2 class="h3 mb-4">Giao hàng</h2>
+                            
+                            <div class="accordion" id="deliveryAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#delivery1">
+                                            Theo dõi đơn hàng
+                                        </button>
+                                    </h3>
+                                    <div id="delivery1" class="accordion-collapse collapse show" data-bs-parent="#deliveryAccordion">
+                                        <div class="accordion-body">
+                                            <ol>
+                                                <li>Đăng nhập vào tài khoản</li>
+                                                <li>Vào mục "Đơn hàng của tôi"</li>
+                                                <li>Chọn đơn hàng cần theo dõi</li>
+                                                <li>Xem trạng thái và vị trí đơn hàng</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#delivery2">
+                                            Thời gian giao hàng
+                                        </button>
+                                    </h3>
+                                    <div id="delivery2" class="accordion-collapse collapse" data-bs-parent="#deliveryAccordion">
+                                        <div class="accordion-body">
+                                            <p>Thời gian giao hàng phụ thuộc vào:</p>
+                                            <ul>
+                                                <li>Khoảng cách từ nhà hàng</li>
+                                                <li>Thời gian chuẩn bị món</li>
+                                                <li>Điều kiện giao thông</li>
+                                                <li>Thời tiết</li>
+                                            </ul>
+                                            <p>Thông thường từ 30-45 phút trong khu vực nội thành.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support Section -->
+                        <div id="support" class="mb-5">
+                            <h2 class="h3 mb-4">Hỗ trợ khách hàng</h2>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Liên hệ hỗ trợ</h5>
+                                    <p>Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ bạn 24/7:</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-phone me-2"></i>Hotline: 1900.2280</li>
+                                        <li><i class="fas fa-envelope me-2"></i>Email: support@example.com</li>
+                                        <li><i class="fas fa-comment me-2"></i>Live chat: Nhấn vào biểu tượng chat góc phải</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gửi yêu cầu hỗ trợ</h5>
+                                    <form id="supportForm" onsubmit="return submitSupportForm(event)">
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Chủ đề</label>
+                                            <select class="form-select" id="subject" required>
+                                                <option value="">Chọn chủ đề</option>
+                                                <option value="account">Vấn đề tài khoản</option>
+                                                <option value="order">Đơn hàng</option>
+                                                <option value="delivery">Giao hàng</option>
+                                                <option value="payment">Thanh toán</option>
+                                                <option value="other">Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Nội dung</label>
+                                            <textarea class="form-control" id="message" rows="4" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-paper-plane me-2"></i>Gửi yêu cầu
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technical Section -->
+                        <div id="technical" class="mb-5">
+                            <h2 class="h3 mb-4">Vấn đề kỹ thuật</h2>
+                            
+                            <div class="accordion" id="technicalAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#technical1">
+                                            Website không tải được
+                                        </button>
+                                    </h3>
+                                    <div id="technical1" class="accordion-collapse collapse show" data-bs-parent="#technicalAccordion">
+                                        <div class="accordion-body">
+                                            <p>Thử các cách sau:</p>
+                                            <ol>
+                                                <li>Kiểm tra kết nối internet</li>
+                                                <li>Xóa cache trình duyệt</li>
+                                                <li>Thử trình duyệt khác</li>
+                                                <li>Tải lại trang</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#technical2">
+                                            Lỗi thanh toán
+                                        </button>
+                                    </h3>
+                                    <div id="technical2" class="accordion-collapse collapse" data-bs-parent="#technicalAccordion">
+                                        <div class="accordion-body">
+                                            <p>Nếu gặp lỗi thanh toán:</p>
+                                            <ol>
+                                                <li>Kiểm tra thông tin thẻ</li>
+                                                <li>Đảm bảo đủ số dư</li>
+                                                <li>Thử phương thức thanh toán khác</li>
+                                                <li>Liên hệ ngân hàng nếu cần</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Support -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="mb-4">Vẫn cần giúp đỡ?</h2>
+                    <p class="mb-4">Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ bạn</p>
+                    <a href="contact.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-headset me-2"></i>Liên hệ hỗ trợ
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Include footer -->
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // Load header and footer
+        fetch('templates/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+        
+        fetch('templates/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+
+        // Handle search
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const questions = document.querySelectorAll('.accordion-button');
+            
+            questions.forEach(question => {
+                const text = question.textContent.toLowerCase();
+                const accordionItem = question.closest('.accordion-item');
+                
+                if (text.includes(searchTerm)) {
+                    accordionItem.style.display = 'block';
+                } else {
+                    accordionItem.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Handle support form submission
+        function submitSupportForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('supportForm');
+            if (!validateForm(form)) {
+                alert('Vui lòng điền đầy đủ thông tin');
+                return false;
+            }
+
+            // Add your form submission logic here
+            alert('Cảm ơn bạn đã gửi yêu cầu hỗ trợ. Chúng tôi sẽ phản hồi sớm nhất có thể.');
+            form.reset();
+            return false;
+        }
+    </script>
+</body>
+</html> 

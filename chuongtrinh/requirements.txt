@@ -1,0 +1,19 @@
+# Restaurant Website Server Requirements
+# Các thư viện cần thiết để chạy web server
+
+# Python version
+# Python >= 3.6
+
+# Các thư viện built-in (không cần cài đặt thêm):
+# - http.server
+# - urllib.parse
+# - json
+# - os
+# - sys
+# - threading
+# - time
+# - webbrowser
+# - mimetypes
+
+# Không cần cài đặt thêm thư viện nào vì tất cả đều là built-in modules
+# Chỉ cần Python 3.6 trở lên 

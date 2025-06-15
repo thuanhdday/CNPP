@@ -1,0 +1,136 @@
+/* Common styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    padding: 1rem 0;
+    background-color: white !important;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #0d6efd !important;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #0d6efd !important;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Sections */
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #0d6efd;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        margin: 0.25rem 0;
+    }
+
+    .btn {
+        padding: 0.4rem 1.2rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+} 

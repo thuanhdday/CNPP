@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực đơn - Restaurant Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .cuisine-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .cuisine-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cuisine-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .cuisine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cuisine-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+        }
+
+        .cuisine-info {
+            padding: 1.5rem;
+        }
+
+        .cuisine-price {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #dee2e6;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quantity-control button:hover {
+            background: #f8f9fa;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .cart-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-price {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-tag.active {
+            background: #ff6b6b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include header -->
+    <div id="header"></div>
+
+    <!-- Main content -->
+    <main class="py-5">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="restaurants.html">Nhà hàng</a></li>
+                    <li class="breadcrumb-item"><a href="#" id="restaurantLink">Tên nhà hàng</a></li>
+                    <li class="breadcrumb-item active">Thực đơn</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Filters -->
+                    <div class="filter-section">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Danh mục món ăn</h5>
+                            <div class="input-group" style="width: 300px;">
+                                <input type="search" class="form-control" placeholder="Tìm món ăn..." id="searchInput">
+                                <button class="btn btn-outline-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="category-tags" id="categoryTags">
+                            <!-- Categories will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Cuisine list -->
+                    <div class="row g-4" id="cuisineList">
+                        <!-- Cuisine items will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Cart sidebar -->
+                    <div class="cart-sidebar">
+                        <h5 class="mb-4">Giỏ hàng</h5>
+                        <div id="cartItems">
+                            <!-- Cart items will be dynamically added here -->
+                        </div>
+                        <div class="cart-summary">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tạm tính:</span>
+                                <span id="subtotal">0đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Phí dịch vụ:</span>
+                                <span id="serviceFee">0đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <strong>Tổng cộng:</strong>
+                                <strong id="total" class="text-primary">0đ</strong>
+                            </div>
+                            <button class="btn btn-primary w-100" onclick="proceedToCheckout()">
+                                <i class="fas fa-shopping-cart me-2"></i>Đặt món
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // Load header and footer
+        fetch('templates/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+        
+        fetch('templates/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+
+        // Get restaurant data from localStorage
+        const restaurant = JSON.parse(localStorage.getItem('selectedRestaurant'));
+        if (!restaurant) {
+            window.location.href = 'restaurants.html';
+        }
+
+        // Initialize cart
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Update page with restaurant data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update title and breadcrumb
+            document.title = `Thực đơn - ${restaurant.name}`;
+            document.getElementById('restaurantLink').textContent = restaurant.name;
+            document.getElementById('restaurantLink').href = `restaurant-detail.html?id=${restaurant.id}`;
+
+            // Generate categories
+            generateCategories();
+
+            // Generate cuisine list
+            generateCuisineList();
+
+            // Update cart
+            updateCart();
+
+            // Add search handler
+            document.getElementById('searchInput').addEventListener('input', filterCuisines);
+        });
+
+        // Generate categories
+        function generateCategories() {
+            const categories = [
+                { id: 'all', name: 'Tất cả' },
+                { id: 'appetizer', name: 'Khai vị' },
+                { id: 'main', name: 'Món chính' },
+                { id: 'seafood', name: 'Hải sản' },
+                { id: 'vegetarian', name: 'Món chay' },
+                { id: 'dessert', name: 'Tráng miệng' },
+                { id: 'drinks', name: 'Đồ uống' }
+            ];
+
+            const categoryTags = document.getElementById('categoryTags');
+            categoryTags.innerHTML = categories.map(category => `
+                <span class="category-tag ${category.id === 'all' ? 'active' : ''}" 
+                      data-category="${category.id}">${category.name}</span>
+            `).join('');
+
+            // Add click handler for category tags
+            categoryTags.querySelectorAll('.category-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    categoryTags.querySelector('.active').classList.remove('active');
+                    this.classList.add('active');
+                    filterCuisines();
+                });
+            });
+        }
+
+        // Generate cuisine list
+        function generateCuisineList() {
+            const cuisines = [
+                {
+                    id: 1,
+                    name: 'Gỏi cuốn tôm thịt',
+                    image: 'images/cuisines/goi-cuon.jpg',
+                    price: 65000,
+                    category: 'appetizer',
+                    description: 'Tôm, thịt heo, rau sống, bún',
+                    spicy: false
+                },
+                {
+                    id: 2,
+                    name: 'Cua rang me',
+                    image: 'images/cuisines/cua-rang-me.jpg',
+                    price: 450000,
+                    category: 'seafood',
+                    description: 'Cua biển tươi sống rang với me chua ngọt',
+                    spicy: true
+                }
+                // Thêm các món khác
+            ];
+
+            const cuisineList = document.getElementById('cuisineList');
+            cuisineList.innerHTML = cuisines.map(cuisine => `
+                <div class="col-md-6" data-category="${cuisine.category}">
+                    <div class="cuisine-card">
+                        <div class="cuisine-image">
+                            <img src="${cuisine.image}" alt="${cuisine.name}">
+                            ${cuisine.spicy ? '<span class="cuisine-badge"><i class="fas fa-pepper-hot me-1"></i>Cay</span>' : ''}
+                        </div>
+                        <div class="cuisine-info">
+                            <h5 class="mb-2">${cuisine.name}</h5>
+                            <p class="text-muted small mb-3">${cuisine.description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="cuisine-price">${formatPrice(cuisine.price)}</span>
+                                <div class="quantity-control">
+                                    <button onclick="decreaseQuantity(${cuisine.id})">-</button>
+                                    <input type="number" value="1" min="1" id="quantity-${cuisine.id}">
+                                    <button onclick="addToCart(${cuisine.id})">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter cuisines
+        function filterCuisines() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.querySelector('.category-tag.active').dataset.category;
+            
+            document.querySelectorAll('#cuisineList > div').forEach(item => {
+                const category = item.dataset.category;
+                const name = item.querySelector('h5').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                
+                const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+                const matchesSearch = name.includes(searchTerm) || description.includes(searchTerm);
+                
+                item.style.display = matchesCategory && matchesSearch ? 'block' : 'none';
+            });
+        }
+
+        // Add to cart
+        function addToCart(cuisineId) {
+            const quantity = parseInt(document.getElementById(`quantity-${cuisineId}`).value);
+            const cuisine = getCuisineById(cuisineId);
+            
+            const existingItem = cart.find(item => item.id === cuisineId);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: cuisineId,
+                    name: cuisine.name,
+                    price: cuisine.price,
+                    quantity: quantity,
+                    image: cuisine.image
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(cuisineId) {
+            const input = document.getElementById(`quantity-${cuisineId}`);
+            const currentValue = parseInt(input.value);
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+            }
+        }
+
+        // Update cart
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-muted text-center">Giỏ hàng trống</p>';
+                updateTotals(0, 0);
+                return;
+            }
+
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-info">
+                        <h6 class="mb-1">${item.name}</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="cart-item-price">${formatPrice(item.price)}</span>
+                            <div class="quantity-control">
+                                <button onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <input type="number" value="${item.quantity}" min="1" 
+                                       onchange="updateCartItemQuantity(${item.id}, this.value)">
+                                <button onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const serviceFee = subtotal * 0.1; // 10% service fee
+            updateTotals(subtotal, serviceFee);
+        }
+
+        // Update cart item quantity
+        function updateCartItemQuantity(cuisineId, newQuantity) {
+            newQuantity = parseInt(newQuantity);
+            if (newQuantity < 1) {
+                cart = cart.filter(item => item.id !== cuisineId);
+            } else {
+                const item = cart.find(item => item.id === cuisineId);
+                if (item) {
+                    item.quantity = newQuantity;
+                }
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        // Update totals
+        function updateTotals(subtotal, serviceFee) {
+            document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('serviceFee').textContent = formatPrice(serviceFee);
+            document.getElementById('total').textContent = formatPrice(subtotal + serviceFee);
+        }
+
+        // Format price
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
+
+        // Get cuisine by ID
+        function getCuisineById(id) {
+            // In a real application, this would fetch from your cuisine database
+            const cuisines = [
+                {
+                    id: 1,
+                    name: 'Gỏi cuốn tôm thịt',
+                    image: 'images/cuisines/goi-cuon.jpg',
+                    price: 65000,
+                    category: 'appetizer',
+                    description: 'Tôm, thịt heo, rau sống, bún'
+                },
+                {
+                    id: 2,
+                    name: 'Cua rang me',
+                    image: 'images/cuisines/cua-rang-me.jpg',
+                    price: 450000,
+                    category: 'seafood',
+                    description: 'Cua biển tươi sống rang với me chua ngọt'
+                }
+            ];
+            return cuisines.find(c => c.id === id);
+        }
+
+        // Proceed to checkout
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Vui lòng chọn món ăn trước khi đặt món');
+                return;
+            }
+
+            const confirmed = confirm('Xác nhận đặt các món ăn đã chọn?');
+            if (confirmed) {
+                // Here you would typically send the order to your server
+                alert('Đặt món thành công! Chúng tôi sẽ chuẩn bị món ăn ngay.');
+                cart = [];
+                localStorage.removeItem('cart');
+                updateCart();
+            }
+        }
+    </script>
+</body>
+</html> 

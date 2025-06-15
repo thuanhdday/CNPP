@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Nhà hàng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .login-header h2 {
+            color: #0d6efd;
+        }
+        .form-floating {
+            margin-bottom: 1rem;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1.1rem;
+        }
+        .social-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .social-btn {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .social-btn i {
+            margin-right: 1rem;
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .test-accounts {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .test-accounts h6 {
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        .test-account {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #0d6efd;
+        }
+        .test-account.admin {
+            border-left-color: #dc3545;
+        }
+        .test-account.user {
+            border-left-color: #28a745;
+        }
+        .copy-btn {
+            float: right;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Đăng nhập</h2>
+            <p class="text-muted">Vui lòng đăng nhập để tiếp tục</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                <label for="password">Mật khẩu</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="remember">
+                    <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+                </div>
+                <a href="#" class="text-primary">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-login">Đăng nhập</button>
+        </form>
+
+        <!-- Tài khoản test -->
+        <div class="test-accounts">
+            <h6><i class="fas fa-info-circle me-2"></i>Tài khoản test</h6>
+            <div class="test-account admin">
+                <strong>Admin:</strong> admin1@gmail.com / Admin123
+                <button class="btn btn-sm btn-outline-danger copy-btn" onclick="copyToClipboard('admin1@gmail.com', 'Admin123')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <div class="test-account admin">
+                <strong>Admin:</strong> admin2@gmail.com / Admin123
+                <button class="btn btn-sm btn-outline-danger copy-btn" onclick="copyToClipboard('admin2@gmail.com', 'Admin123')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <div class="test-account user">
+                <strong>User:</strong> user1@gmail.com / User1234
+                <button class="btn btn-sm btn-outline-success copy-btn" onclick="copyToClipboard('user1@gmail.com', 'User1234')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <div class="test-account user">
+                <strong>User:</strong> user2@gmail.com / User1234
+                <button class="btn btn-sm btn-outline-success copy-btn" onclick="copyToClipboard('user2@gmail.com', 'User1234')">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="social-login">
+            <p class="text-muted">Hoặc đăng nhập với</p>
+            <button class="btn btn-outline-primary social-btn mb-2">
+                <i class="fab fa-google"></i>
+                Google
+            </button>
+            <button class="btn btn-outline-primary social-btn">
+                <i class="fab fa-facebook"></i>
+                Facebook
+            </button>
+        </div>
+
+        <div class="register-link">
+            <p>Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tài khoản test mẫu
+        const adminAccounts = [
+            { email: "admin1@gmail.com", password: "Admin123", role: "admin", name: "Admin 1" },
+            { email: "admin2@gmail.com", password: "Admin123", role: "admin", name: "Admin 2" }
+        ];
+        
+        const userAccounts = [
+            { email: "user1@gmail.com", password: "User1234", role: "user", name: "User 1" },
+            { email: "user2@gmail.com", password: "User1234", role: "user", name: "User 2" }
+        ];
+
+        // Hàm copy thông tin đăng nhập
+        function copyToClipboard(email, password) {
+            const text = `Email: ${email}\nMật khẩu: ${password}`;
+            navigator.clipboard.writeText(text).then(() => {
+                // Hiển thị thông báo tạm thời
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                btn.classList.remove('btn-outline-danger', 'btn-outline-success');
+                btn.classList.add('btn-success');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('btn-success');
+                    if (email.includes('admin')) {
+                        btn.classList.add('btn-outline-danger');
+                    } else {
+                        btn.classList.add('btn-outline-success');
+                    }
+                }, 1000);
+            });
+        }
+
+        // Xử lý đăng nhập
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Tìm tài khoản trong danh sách test
+            let user = adminAccounts.find(acc => acc.email === email && acc.password === password)
+                    || userAccounts.find(acc => acc.email === email && acc.password === password);
+            
+            if (user) {
+                // Lưu thông tin user vào localStorage
+                localStorage.setItem('userRole', user.role);
+                localStorage.setItem('userName', user.name);
+                localStorage.setItem('userEmail', user.email);
+                
+                // Hiển thị thông báo thành công
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-success position-fixed`;
+                alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+                alertDiv.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    Đăng nhập thành công!<br>
+                    <small>Chào mừng ${user.name} (${user.role})</small>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                // Chuyển hướng sau 1 giây
+                setTimeout(() => {
+                    if (user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                }, 1000);
+                
+                // Xóa thông báo sau 3 giây
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 3000);
+                
+            } else {
+                // Thử gọi API thật (nếu có)
+                try {
+                    const response = await fetch('http://localhost:5003/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (data.status === 'success') {
+                        alert('Đăng nhập thành công!');
+                        if (data.user && data.user.role === 'admin') {
+                            window.location.href = 'admin.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    } else {
+                        alert(data.message || 'Đăng nhập thất bại');
+                    }
+                } catch (error) {
+                    alert('Tài khoản không tồn tại hoặc mật khẩu sai!');
+                }
+            }
+        });
+
+        // Auto-fill cho test nhanh
+        document.addEventListener('DOMContentLoaded', () => {
+            // Thêm sự kiện click để auto-fill
+            document.querySelectorAll('.test-account').forEach(account => {
+                account.addEventListener('click', (e) => {
+                    if (!e.target.closest('button')) {
+                        const text = account.textContent;
+                        const email = text.match(/[\w\.-]+@[\w\.-]+\.\w+/)[0];
+                        const password = text.match(/\/\s*([^\s]+)/)[1];
+                        
+                        document.getElementById('email').value = email;
+                        document.getElementById('password').value = password;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
